@@ -1,6 +1,12 @@
 from fastapi import FastAPI
-from app.routes.test import router as test_router
+from app.database import engine
+from app.models.base import Base
+from app.models.User import User
+from app.models.Application import Application
+from app.routes.auth_route import router as auth_router
 
 app=FastAPI()
 
-app.include_router(test_router)
+Base.metadata.create_all(bind=engine)
+
+app.include_router(auth_router)

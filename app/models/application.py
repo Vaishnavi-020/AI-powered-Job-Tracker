@@ -1,10 +1,11 @@
-from sqlalchemy import Column,String,Integer,Date,func,Enum,DateTime
+from sqlalchemy import Column,String,Integer,Date,func,Enum,DateTime,ForeignKey
 from app.models.base import Base
 from sqlalchemy.orm import relationship
 
 class Application(Base):
     __tablename__="application"
     id=Column(Integer,primary_key=True)
+    user_id=Column(Integer,ForeignKey("users.id",ondelete="CASCADE"),index=True)
     company_name=Column(String,nullable=False)
     role=Column(String,nullable=False)
     location=Column(String,nullable=False)
