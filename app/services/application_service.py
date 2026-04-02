@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.models.User import User
 from app.models.Application import Application
@@ -27,3 +28,14 @@ def add_application_service(application_data:AddApplication,db:Session,current_u
 def view_all_applications_service(db:Session,current_user:User):
     applications=db.query(Application).filter(Application.user_id==current_user.id).all()
     return applications
+
+def view_single_application_service(application_id:int,db:Session,current_user:User):
+    existing_application=db.query(Application).filter(Application.id==application_id).first()
+    if not existing_application:
+        raise HTTPException(status_code=404,
+                            detail="Application not found")
+    if existing_application.user_id != current_user.id:
+        raise HTTPException(status_code=403,
+                            detail="Not allowed to view this application")
+    return existing_application
+    
