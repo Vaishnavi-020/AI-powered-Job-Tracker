@@ -33,7 +33,7 @@ def create_access_token(data:dict,expires_delta:timedelta|None=None):
 #Decode Access Token
 def decode_access_token(token:str):
     try:
-        payload=jwt.decode(token,SECRET_KEY,algorithm=JWT_ALGORITHM)
+        payload=jwt.decode(token,SECRET_KEY,algorithms=JWT_ALGORITHM)
         return payload
     except JWTError:
         raise HTTPException(

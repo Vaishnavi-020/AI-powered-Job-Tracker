@@ -1,6 +1,7 @@
 from sqlalchemy import Column,String,Integer,Date,func,Enum,DateTime,ForeignKey
 from app.models.base import Base
 from sqlalchemy.orm import relationship
+from app.enums.application_status import ApplicationStatus
 
 class Application(Base):
     __tablename__="application"
@@ -12,12 +13,9 @@ class Application(Base):
     applied_date=Column(Date,server_default=func.now())
     link=Column(String(2048))
     status=Column(Enum(
-        'Applied',
-        'Interview',
-        'Rejected',
-        'Offer',
+        ApplicationStatus,
         name="application_status"
-    ),nullable=False,default="Applied")
+    ),nullable=False,default=ApplicationStatus.Applied)
     source=Column(String(100))
     notes=Column(String(500))
     created_at=Column(DateTime(timezone=True),server_default=func.now())

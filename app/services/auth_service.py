@@ -37,7 +37,7 @@ def signup_user_service(user_data:UserCreate,db:Session):
             "user":new_user
         }
 
-    except Exception as e:
+    except:
         db.rollback()
         raise 
     
