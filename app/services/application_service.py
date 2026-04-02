@@ -53,4 +53,16 @@ def update_application_status_service(application_id:int,application_status:Upda
     db.refresh(application)
 
     return application
+
+def delete_application_service(application_id:int,db:Session,current_user:User):
+    application=db.query(Application).filter(Application.id==application_id).first()
+    if not application:
+        raise HTTPException(status_code=404,
+                            detail="Application not found")
+    if application.user_id!=current_user.id:
+        raise HTTPException(status_code=403,
+                            detail="Not allowed to perform this action")
+    db.delete(application)
+    db.commit()
+    return {"message":"Application deleted successfully"}
     

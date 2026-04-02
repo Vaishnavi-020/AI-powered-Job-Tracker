@@ -1,7 +1,7 @@
 from fastapi import APIRouter,Depends
 from sqlalchemy.orm import Session
 from app.schema.application_schema import AddApplication,ApplicationResponse,AllApplicationResponse,UpdateApplicationStatus
-from app.services.application_service import add_application_service,view_all_applications_service,view_single_application_service,update_application_status_service
+from app.services.application_service import add_application_service,view_all_applications_service,view_single_application_service,update_application_status_service,delete_application_service
 from app.database import get_db
 from app.dependencies import get_current_user
 from typing import List
@@ -27,5 +27,6 @@ def update_application_status(application_id:int,
                               current_user=Depends(get_current_user)):
     return update_application_status_service(application_id,application_status,db,current_user)
 
-
-    
+@router.delete("/delete/{application_id}")
+def delete_application(application_id:int,db:Session=Depends(get_db),current_user=Depends(get_current_user)):
+    return delete_application_service(application_id,db,current_user)
