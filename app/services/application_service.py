@@ -23,3 +23,7 @@ def add_application_service(application_data:AddApplication,db:Session,current_u
     except:
         db.rollback()
         raise
+
+def view_all_applications_service(db:Session,current_user:User):
+    applications=db.query(Application).filter(Application.user_id==current_user.id).all()
+    return applications

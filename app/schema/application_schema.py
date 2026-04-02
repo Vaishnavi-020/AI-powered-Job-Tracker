@@ -29,3 +29,12 @@ class ApplicationResponse(BaseModel):
     class Config:
         from_attributes=True
 
+class AllApplicationResponse(BaseModel):
+    company_name:str
+    role:str
+    status:ApplicationStatus
+    created_at:datetime
+
+    class Config:
+        from_attributes=True
+
