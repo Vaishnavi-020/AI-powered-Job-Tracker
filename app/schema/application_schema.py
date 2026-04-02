@@ -38,3 +38,5 @@ class AllApplicationResponse(BaseModel):
     class Config:
         from_attributes=True
 
+class UpdateApplicationStatus(BaseModel):
+    status:ApplicationStatus
