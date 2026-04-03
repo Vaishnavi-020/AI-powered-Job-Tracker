@@ -7,3 +7,8 @@ bcrypt==4.3.0
 python-jose
 python-multipart
 pydantic[email]
+pypdf
+openai
+chromadb==0.4.24
+sentence-transformers
+numpy==1.26.4
