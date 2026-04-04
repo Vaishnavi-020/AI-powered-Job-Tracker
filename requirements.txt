@@ -12,3 +12,5 @@ openai
 chromadb==0.4.24
 sentence-transformers
 numpy==1.26.4
+langchain
+langchain_text_splitters
