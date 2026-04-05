@@ -30,6 +30,7 @@ class ApplicationResponse(BaseModel):
         from_attributes=True
 
 class AllApplicationResponse(BaseModel):
+    id:int
     company_name:str
     role:str
     status:ApplicationStatus
